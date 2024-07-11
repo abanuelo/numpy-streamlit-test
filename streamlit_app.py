@@ -38,27 +38,3 @@ dataframe["Location"] = dataframe["Location"].replace(
 
 # Display dataframe and text
 st.dataframe(dataframe)
-st.markdown("Below is a map showing all the Airbnb listings with a red dot and the location we've chosen with a blue dot.")
-
-# Create the plotly express figure
-fig = px.scatter_mapbox(
-    dataframe,
-    lat="Latitude",
-    lon="Longitude",
-    color="Location",
-    color_discrete_sequence=["blue", "red"],
-    zoom=11,
-    height=500,
-    hover_name="Price",
-    hover_data=["Meters from chosen location", "Location"],
-    labels={"color": "Locations"},
-)
-
-# Center the map
-fig.update_layout(mapbox=dict(center=dict(lat=dataframe["Latitude"].mean(), lon=dataframe["Longitude"].mean())))
-
-# Set the map style
-fig.update_layout(mapbox_style="stamen-terrain")
-
-# Show the figure
-st.plotly_chart(fig, use_container_width=True)
