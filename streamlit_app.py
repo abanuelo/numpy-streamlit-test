@@ -52,9 +52,9 @@ fig = px.scatter_mapbox(
     hover_name="Price",
     hover_data=["Meters from chosen location", "Location"],
     labels={"color": "Locations"},
-    tileset="open-street-map",  # Choose a tileset that does not require a Mapbox token
 )
 
+fig.update_layout(mapbox_style="open-street-map")
 # Center the map
 fig.update_layout(mapbox=dict(center=dict(lat=dataframe["Latitude"].mean(), lon=dataframe["Longitude"].mean())))
 
