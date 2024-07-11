@@ -47,10 +47,10 @@ fig = px.scatter_mapbox(
     height=500,
     width=800,
     hover_name="Price",
-    hover_data=["Meters from chosen location", "Location"],
-    labels={"color": "Locations"},
+    hover_data=["Meters from chosen location", "Location"],  # Adjust here to use transformed "Location" column
+    labels={"Location": "Locations"},  # Update the label if necessary
 )
-fig.update_geos(center=dict(lat=dataframe.iloc[0][2], lon=dataframe.iloc[0][3]))
+fig.update_geos(center=dict(lat=dataframe.iloc[0]["Latitude"], lon=dataframe.iloc[0]["Longitude"]))
 fig.update_layout(mapbox_style="stamen-terrain")
 
 # Show the figure
