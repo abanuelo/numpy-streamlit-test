@@ -2,12 +2,9 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-# Set Mapbox token
-# px.set_mapbox_access_token("YOUR_MAPBOX_ACCESS_TOKEN")
-
 # Display title and text
 st.title("Week 1 - Data and visualization")
-st.markdown("Here we can see the dataframe created during this week's project.")
+st.markdown("Here we can see the dataframe created during this weeks project.")
 
 # Read dataframe
 dataframe = pd.read_csv(
@@ -20,7 +17,6 @@ dataframe = pd.read_csv(
         "Meters from chosen location",
         "Location",
     ],
-    skiprows=1  # skip the header row if your CSV has one
 )
 
 # We have a limited budget, therefore we would like to exclude
@@ -49,14 +45,20 @@ fig = px.scatter_mapbox(
     color_discrete_sequence=["blue", "red"],
     zoom=11,
     height=500,
+    width=800,
     hover_name="Price",
     hover_data=["Meters from chosen location", "Location"],
     labels={"color": "Locations"},
 )
-
 fig.update_layout(mapbox_style="open-street-map")
+fig.update_geos(center=dict(lat=dataframe.iloc[0][2], lon=dataframe.iloc[0][3]))
+
+
+
+
+
 # Center the map
-fig.update_layout(mapbox=dict(center=dict(lat=dataframe["Latitude"].mean(), lon=dataframe["Longitude"].mean())))
+# fig.update_layout(mapbox=dict(center=dict(lat=dataframe["Latitude"].mean(), lon=dataframe["Longitude"].mean())))
 
 # Show the figure
 st.plotly_chart(fig, use_container_width=True)
